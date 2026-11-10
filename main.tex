@@ -1,0 +1,103 @@
+%!TEX program = xelatex
+%!TEX encoding = UTF-8 Unicode
+% ============================================================================
+%  科研调研结果汇总 · 紧凑中文模板
+%  编译：xelatex main.tex（连跑两次）  或  latexmk -xelatex main.tex
+% ============================================================================
+\documentclass[UTF8,11pt,a4paper,fontset=fandol]{ctexart}
+
+% ---------------------------- 页面与行距 ----------------------------
+\usepackage[top=2cm,bottom=2cm,left=2cm,right=2cm]{geometry}
+\pagestyle{plain}          % 不要页眉，页码居中放页脚
+\raggedbottom              % 避免页面被垂直拉伸
+\linespread{1.15}          % 比 ctex 默认的 1.3 更紧
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.15em}
+\widowpenalty=10000
+\clubpenalty=10000
+
+% ---------------------------- 常用宏包 ----------------------------
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs,tabularx}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[hidelinks]{hyperref}
+
+% 参考文献紧凑化
+\setlength{\bibsep}{2pt plus 0.3ex}
+\renewcommand{\bibfont}{\small}
+
+% ---------------------------- 标题层级（紧凑） ----------------------------
+\ctexset{
+  section = {
+    format     = \large\bfseries,
+    aftername  = \quad,
+    beforeskip = 1.2ex plus .2ex,
+    afterskip  = 0.4ex,
+  },
+  subsection = {
+    format     = \normalsize\bfseries,
+    aftername  = \quad,
+    beforeskip = 0.8ex plus .1ex,
+    afterskip  = 0.2ex,
+  },
+  subsubsection = {
+    format     = \normalsize\bfseries,
+    aftername  = \quad,
+    beforeskip = 0.6ex,
+    afterskip  = 0.1ex,
+  },
+}
+
+% ---------------------------- 列表与图表紧凑化 ----------------------------
+\setlist{nosep,leftmargin=1.6em}
+\captionsetup{font=small,labelfont=bf,skip=4pt}
+\setlength{\abovecaptionskip}{4pt}
+\setlength{\belowcaptionskip}{2pt}
+\setlength{\floatsep}{6pt plus 2pt minus 2pt}
+\setlength{\textfloatsep}{8pt plus 2pt minus 2pt}
+\setlength{\intextsep}{6pt plus 2pt minus 2pt}
+\renewcommand{\arraystretch}{1.05}
+
+% ---------------------------- 自定义标题块 ----------------------------
+% 左上角大标题；副标题与元信息可选；标题后留一段较宽空白，直接进入正文。
+\makeatletter
+\newcommand{\subtitle}[1]{\gdef\@subtitle{#1}}
+\gdef\@subtitle{}
+\newcommand{\meta}[1]{\gdef\@meta{#1}}
+\gdef\@meta{}
+\renewcommand{\maketitle}{%
+  \par\begingroup
+  \parindent=0pt
+  \noindent{\LARGE\bfseries\@title\par}%
+  \ifx\@subtitle\@empty\else
+    \vspace{0.25em}{\large\@subtitle\par}%
+  \fi
+  \ifx\@meta\@empty\else
+    \vspace{0.45em}{\small\color{black!55}\@meta\par}%
+  \fi
+  \par\endgroup
+  \vspace{1.4\baselineskip}%
+  \noindent\ignorespaces
+}
+\makeatother
+
+% ---------------------------- 文档信息 ----------------------------
+\title{标题}
+% 需要时取消注释：
+% \subtitle{副标题}
+% \meta{调研：XXX \quad 日期：\today}
+
+\begin{document}
+\maketitle
+
+% 正文从这里开始
+
+% 需要参考文献时取消下面两行注释，并在 refs.bib 中添加条目
+\bibliographystyle{unsrtnat}
+\bibliography{refs}
+
+\end{document}
